@@ -2,6 +2,10 @@
 
 This project demonstrates how to embed a secret message into a QR code image using Least Significant Bit (LSB) steganography. It allows for secure hiding and retrieval of messages inside QR images.
 
+## Website Link -- https://qr-code-stego.vercel.app/
+
+<br />
+
 ![UI Image](static/images/UI.png)
 
 ## Features
