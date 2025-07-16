@@ -49,6 +49,14 @@
                   placeholder="Type your secret here..."
                 />
 
+                <label>Secret Key</label>
+                <input
+                  type="text"
+                  name="key"
+                  required
+                  placeholder="Type your secret key here..."
+                />
+
                 <button type="submit" name="action" value="encode">
                   Encode
                 </button>
@@ -58,6 +66,13 @@
             <div class="card">
               <h2>Decode Message</h2>
               <form method="POST" enctype="multipart/form-data">
+                <label>Secret Key</label>
+                <input
+                  type="text"
+                  name="key"
+                  required
+                  placeholder="Type your secret key here..."
+                />
                 <label>Upload Stego QR Image</label>
                 <input type="file" name="file" required />
 
@@ -68,7 +83,6 @@
             </div>
           </div>
 
-          <!-- Right side: illustration + explanation -->
           <div class="illustration-column">
             <img
               src="{{ url_for('static', filename='images/qrPic.png') }}"
@@ -89,9 +103,7 @@
         </div>
       </div>
 
-      <footer class="footer">
-        Project Developed by : Aditya Avi - 22BCI0096
-      </footer>
+      <footer class="footer">Developed by : Aditya Avi - 22BCI0096</footer>
     </div>
   </body>
 </html>

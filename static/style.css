@@ -9,7 +9,6 @@ body {
   background-color: #DBE2DC;
   color: #335765;
   height: 100vh;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -38,7 +37,6 @@ h1 {
   color: #335765;
 }
 
-/* Layout: Left and Right */
 .content-container {
   display: flex;
   flex: 1;
@@ -49,7 +47,6 @@ h1 {
   padding: 10px 0;
 }
 
-/* Left: Two stacked cards */
 .cards-column {
   flex: 1;
   display: flex;
@@ -123,7 +120,6 @@ button:hover {
   background-color: #5f9995;
 }
 
-/* Right: Image and explanation */
 .illustration-column {
   flex: 1;
   background: #ffffff;
@@ -156,7 +152,6 @@ button:hover {
   line-height: 1.4;
 }
 
-/* Result box */
 .result-box {
   text-align: center;
   background-color: #ffffff;
@@ -191,7 +186,6 @@ button:hover {
   background-color: #6a4433;
 }
 
-/* Footer */
 .footer {
   text-align: center;
   padding: 10px 0;
@@ -200,7 +194,6 @@ button:hover {
   color: #fff;
 }
 
-/* Mobile adjustments */
 @media (max-width: 900px) {
   body {
     overflow: auto;

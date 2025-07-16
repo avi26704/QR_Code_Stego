@@ -15,19 +15,24 @@ def index():
         if action == 'encode':
             data = request.form['data']
             secret = request.form['secret']
+            key=request.form['key']
             qr_path = os.path.join(UPLOAD_FOLDER, 'qr.png')
             generate_qr(data, qr_path)
             stego_path = os.path.join(UPLOAD_FOLDER, 'stego_qr.png')
-            encode_lsb(qr_path, secret, stego_path)
+            encode_lsb(qr_path, secret, key, stego_path)
             result = 'Encoded successfully. Download below.'
             return render_template('index.html', result=result, image='stego_qr.png')
 
         elif action == 'decode':
+            key = request.form['key']
             file = request.files['file']
             path = os.path.join(UPLOAD_FOLDER, 'uploaded.png')
             file.save(path)
-            message = decode_lsb(path)
-            result = f'Decoded Message: {message}'
+            message = decode_lsb(path,key)
+            if(message=="Wrong decryption key or ciphertext corrupted"):
+                result = f'Error: {message}'
+            else:
+                result = f'Decoded Message: {message}'
 
     return render_template('index.html', result=result)
 
@@ -35,5 +40,3 @@ def index():
 def download_file(filename):
     return send_file(os.path.join(UPLOAD_FOLDER, filename), as_attachment=True)
 
-# if __name__ == '__main__':
-#     app.run()

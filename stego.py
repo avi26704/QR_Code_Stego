@@ -1,5 +1,6 @@
 import qrcode # type: ignore
 from PIL import Image # type: ignore
+from aes import decrypt_aes_128, encrypt_aes_128
 import numpy as np # type: ignore
 
 def generate_qr(data, filename='qr.png'):
@@ -14,10 +15,14 @@ def generate_qr(data, filename='qr.png'):
     img.save(filename)
     return filename
 
-def encode_lsb(image_path, secret_message, output_path='stego_qr.png'):
+def encode_lsb(image_path, plain_text, key, output_path='stego_qr.png'):
     img = Image.open(image_path).convert('RGB')
     data = np.array(img)
     flat_data = data.flatten()
+
+    print(plain_text)
+    secret_message=encrypt_aes_128(plain_text, key)
+    print(secret_message)
 
     binary_message = ''.join(format(ord(i), '08b') for i in secret_message)
     binary_message += '1111111111111110' 
@@ -33,7 +38,7 @@ def encode_lsb(image_path, secret_message, output_path='stego_qr.png'):
     new_img.save(output_path)
     print(f"Message embedded in {output_path}")
 
-def decode_lsb(stego_image_path):
+def decode_lsb(stego_image_path,key):
     img = Image.open(stego_image_path)
     data = np.array(img).flatten()
 
@@ -46,4 +51,6 @@ def decode_lsb(stego_image_path):
 
     binary_data = binary_data[:-16] 
     decoded_chars = [chr(int(binary_data[i:i+8], 2)) for i in range(0, len(binary_data), 8)]
-    return ''.join(decoded_chars)
+    secret = ''.join(decoded_chars)
+    decoded_text=decrypt_aes_128(secret, key)
+    return decoded_text
